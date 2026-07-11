@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UROVO Indonesia — IoT Industrial Digital Solution Provider</title>
+<meta name="description" content="UROVO — Mobile computer, RFID reader, printer, dan Smart POS untuk logistik, retail, manufaktur, dan healthcare.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#081431; --navy2:#0C1D42; --card:#11265033;
+  --blue:#00A0E9; --blue2:#33C4FF; --green:#5FC744;
+  --ink:#EAF2FB; --muted:#8FA7C6; --line:rgba(143,167,198,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--ink);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,.gro{font-family:'Space Grotesk',sans-serif}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:6px}
+
+/* ============ NAV ============ */
+nav{position:fixed;top:0;left:0;right:0;z-index:90;background:rgba(8,20,49,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;height:62px}
+.brand{font-family:'Space Grotesk';font-weight:700;font-size:1.45rem;letter-spacing:.05em;color:#fff}
+.brand b{color:var(--blue)}
+.nav-l{display:flex;gap:26px;font-size:.88rem;color:var(--muted)}
+.nav-l a:hover{color:#fff}
+@media(max-width:820px){.nav-l{display:none}}
+.nav-cta{background:linear-gradient(90deg,var(--blue),var(--blue2));color:#fff;padding:9px 18px;border-radius:99px;font-weight:600;font-size:.83rem}
+
+/* ============ HERO + 3D STAGE ============ */
+header{
+  min-height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:20px;
+  padding:110px 0 60px;position:relative;
+  background:
+    radial-gradient(1000px 600px at 75% 20%,rgba(0,160,233,.20),transparent 60%),
+    radial-gradient(700px 500px at 15% 95%,rgba(95,199,68,.10),transparent 55%),
+    var(--navy);
+  max-width:1200px;margin:0 auto;padding-left:24px;padding-right:24px;
+}
+@media(max-width:900px){header{grid-template-columns:1fr;min-height:auto;text-align:center;padding-top:96px}}
+.grid-bg{position:fixed;inset:0;z-index:-1;opacity:.5;
+  background-image:linear-gradient(rgba(143,167,198,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(143,167,198,.05) 1px,transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(ellipse 90% 70% at 50% 30%,#000 30%,transparent 80%);
+}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-weight:700;margin-bottom:20px}
+.eyebrow::before{content:"";width:30px;height:2px;background:var(--green)}
+h1{font-size:clamp(2.2rem,4.6vw,3.6rem);line-height:1.08;font-weight:700}
+h1 em{font-style:normal;background:linear-gradient(90deg,var(--blue),var(--blue2),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero-sub{color:var(--muted);margin:22px 0 32px;max-width:46ch;font-size:1.02rem}
+@media(max-width:900px){.hero-sub{margin-inline:auto}}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:14px 26px;border-radius:12px;font-weight:600;font-size:.93rem;transition:.2s}
+.btn:active{transform:scale(.97)}
+.btn-p{background:linear-gradient(90deg,var(--blue),var(--blue2));color:#fff;box-shadow:0 8px 28px rgba(0,160,233,.35)}
+.btn-p:hover{box-shadow:0 10px 34px rgba(0,160,233,.5)}
+.btn-g{border:1px solid var(--line);color:var(--ink)}
+.btn-g:hover{border-color:var(--blue)}
+.hero-act{display:flex;gap:14px;flex-wrap:wrap}
+@media(max-width:900px){.hero-act{justify-content:center}}
+
+/* --- 3D floating stage --- */
+.stage{position:relative;height:480px;perspective:1200px}
+@media(max-width:900px){.stage{height:380px;margin-top:24px}}
+.pod{
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  transform-style:preserve-3d;opacity:0;pointer-events:none;
+  transition:opacity .8s ease, transform .8s ease;
+  transform:rotateY(35deg) translateZ(-160px) scale(.85);
+}
+.pod.on{opacity:1;pointer-events:auto;transform:rotateY(-8deg) rotateX(4deg) translateZ(0) scale(1);animation:float 5.5s ease-in-out infinite}
+.pod.out{opacity:0;transform:rotateY(-40deg) translateZ(-160px) scale(.85)}
+@keyframes float{0%,100%{margin-top:0}50%{margin-top:-22px}}
+@media(prefers-reduced-motion:reduce){.pod.on{animation:none}.pod{transition:opacity .4s}}
+.pod-img{width:min(320px,70%);filter:drop-shadow(0 40px 50px rgba(0,0,0,.55)) drop-shadow(0 0 60px rgba(0,160,233,.18))}
+.pod-img.noimg{display:none}
+.pod-fallback{
+  width:230px;height:260px;border-radius:24px;display:none;align-items:center;justify-content:center;
+  background:linear-gradient(160deg,#132A58,#0B1C40);border:1px solid var(--line);
+  font-family:'Space Grotesk';font-size:2rem;font-weight:700;color:var(--blue);
+  filter:drop-shadow(0 40px 50px rgba(0,0,0,.55));
+}
+.pod.noimg .pod-fallback{display:flex}
+.pod-cap{margin-top:26px;text-align:center}
+.pod-cap .k{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green);font-weight:700}
+.pod-cap .n{font-family:'Space Grotesk';font-size:1.5rem;font-weight:700;color:#fff;margin-top:2px}
+.pod-cap .d{font-size:.82rem;color:var(--muted);max-width:34ch}
+.ring{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%) rotateX(72deg);width:440px;height:440px;border-radius:50%;border:1px solid rgba(0,160,233,.35);box-shadow:0 0 60px rgba(0,160,233,.12) inset;pointer-events:none}
+.ring::after{content:"";position:absolute;inset:46px;border-radius:50%;border:1px dashed rgba(95,199,68,.3)}
+.dots{position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);display:flex;gap:9px;z-index:5}
+.dots button{width:9px;height:9px;border-radius:99px;border:none;background:rgba(143,167,198,.35);cursor:pointer;transition:.25s;padding:0}
+.dots button.on{width:26px;background:linear-gradient(90deg,var(--blue),var(--green))}
+
+/* ============ TICKER STATS ============ */
+.ticker{border-block:1px solid var(--line);background:rgba(12,29,66,.6);overflow:hidden}
+.ticker-in{display:flex;gap:0;animation:slide 28s linear infinite;width:max-content}
+@media(prefers-reduced-motion:reduce){.ticker-in{animation:none;flex-wrap:wrap}}
+@keyframes slide{to{transform:translateX(-50%)}}
+.t-item{display:flex;align-items:center;gap:12px;padding:18px 38px;white-space:nowrap;border-right:1px solid var(--line)}
+.t-item b{font-family:'Space Grotesk';font-size:1.35rem;color:#fff}
+.t-item b i{font-style:normal;color:var(--green)}
+.t-item span{font-size:.8rem;color:var(--muted)}
+
+/* ============ DOWNLOAD (satu-satunya) ============ */
+#download{padding:96px 0}
+.dl-split{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:center}
+@media(max-width:900px){.dl-split{grid-template-columns:1fr;gap:36px}}
+.sec-num{font-family:'Space Grotesk';font-size:.78rem;letter-spacing:.2em;color:var(--blue);font-weight:700;margin-bottom:14px}
+h2{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:700;line-height:1.15}
+.sec-p{color:var(--muted);margin-top:14px}
+.dl-stack{display:flex;flex-direction:column;gap:18px}
+.dl-row{
+  display:flex;gap:20px;align-items:center;background:linear-gradient(120deg,rgba(17,38,80,.7),rgba(11,26,58,.7));
+  border:1px solid var(--line);border-radius:18px;padding:24px 26px;transition:.25s;position:relative;overflow:hidden;
+}
+.dl-row::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:linear-gradient(180deg,var(--blue),var(--green))}
+.dl-row:hover{border-color:var(--blue);transform:translateX(6px)}
+.dl-ico{flex:none;width:54px;height:54px;border-radius:14px;display:grid;place-items:center;background:rgba(0,160,233,.12);color:var(--blue)}
+.dl-row:nth-child(2) .dl-ico{background:rgba(95,199,68,.12);color:var(--green)}
+.dl-body h3{font-size:1.05rem;color:#fff}
+.dl-body p{font-size:.82rem;color:var(--muted);margin-top:3px}
+.dl-btn{flex:none;margin-left:auto}
+@media(max-width:640px){.dl-row{flex-wrap:wrap}.dl-btn{margin-left:0;width:100%;justify-content:center}}
+
+/* ============ PRODUK ============ */
+#produk{padding:40px 0 90px}
+.cat{margin-bottom:90px}
+.cat-head{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:end;margin-bottom:34px}
+.cat-idx{font-family:'Space Grotesk';font-size:clamp(3rem,7vw,4.6rem);font-weight:700;line-height:.85;color:transparent;-webkit-text-stroke:1.5px rgba(0,160,233,.5)}
+.cat-head h3{font-size:clamp(1.3rem,2.6vw,1.9rem);color:#fff}
+.cat-head p{color:var(--muted);font-size:.9rem;max-width:60ch}
+/* baris produk: scroll horizontal dengan snap */
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:min(255px,72vw);gap:18px;overflow-x:auto;padding:6px 4px 22px;scroll-snap-type:x mandatory;scrollbar-width:thin;scrollbar-color:var(--blue) transparent}
+.rail::-webkit-scrollbar{height:6px}
+.rail::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--blue),var(--green));border-radius:99px}
+.rail::-webkit-scrollbar-track{background:rgba(143,167,198,.08);border-radius:99px}
+.pc{
+  scroll-snap-align:start;background:linear-gradient(165deg,#122A5B,#0A1A3C);
+  border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .25s,border-color .25s;
+}
+.pc:hover{transform:translateY(-6px);border-color:var(--blue)}
+.pc-imgbox{height:190px;display:grid;place-items:center;background:
+  radial-gradient(280px 160px at 50% 100%,rgba(0,160,233,.16),transparent 70%);position:relative}
+.pc-imgbox img{max-height:160px;max-width:78%;object-fit:contain;filter:drop-shadow(0 16px 20px rgba(0,0,0,.5));transition:transform .3s}
+.pc:hover .pc-imgbox img{transform:scale(1.07) translateY(-4px)}
+.pc-imgbox img.noimg{display:none}
+.pc-ph{display:none;font-family:'Space Grotesk';font-weight:700;font-size:1.6rem;color:rgba(0,160,233,.55);letter-spacing:.04em}
+.pc-imgbox.noimg .pc-ph{display:block}
+.pc-body{padding:18px 20px 20px;border-top:1px solid var(--line);flex:1;display:flex;flex-direction:column}
+.pc-name{font-family:'Space Grotesk';font-weight:700;font-size:1.08rem;color:#fff}
+.pc-desc{font-size:.8rem;color:var(--muted);margin-top:6px;flex:1}
+.pc-spec{margin-top:14px;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green)}
+.rail-hint{font-size:.74rem;color:var(--muted);display:flex;align-items:center;gap:8px;margin-top:-8px}
+.rail-hint::before{content:"⟵ ⟶";letter-spacing:.05em;color:var(--blue)}
+
+/* ============ INDUSTRI (diagonal band) ============ */
+#industri{position:relative;padding:110px 0;background:linear-gradient(120deg,rgba(0,160,233,.10),rgba(95,199,68,.07));
+  clip-path:polygon(0 6%,100% 0,100% 94%,0 100%)}
+.ind-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px;margin-top:38px}
+.ind{border:1px solid var(--line);background:rgba(8,20,49,.55);border-radius:12px;padding:16px;text-align:center;font-size:.86rem;transition:.2s}
+.ind:hover{border-color:var(--green);transform:translateY(-3px)}
+
+/* ============ CTA + FOOTER ============ */
+#kontak{padding:100px 0 80px;text-align:center}
+#kontak p{color:var(--muted);max-width:52ch;margin:14px auto 30px}
+footer{border-top:1px solid var(--line);padding:32px 0;text-align:center;color:var(--muted);font-size:.8rem}
+footer a{color:var(--blue)}
+
+/* --- panel gambar produk: transparan, produk melayang di navy --- */
+.pc-imgbox{height:235px;background:radial-gradient(300px 150px at 50% 108%,rgba(0,160,233,.16),transparent 72%);padding:18px;place-items:center}
+.pc-imgbox img{width:100%;height:100%;max-width:none;max-height:none;object-fit:contain;background:none;border-radius:0;padding:0;filter:drop-shadow(0 18px 26px rgba(0,0,0,.55))}
+.pc:hover .pc-imgbox img{transform:scale(1.05)}
+.pc-imgbox.noimg{background:radial-gradient(280px 160px at 50% 100%,rgba(0,160,233,.16),transparent 70%)}
+.pc-imgbox.noimg .pc-ph{font-size:1.7rem}
+/* --- hero: gambar besar dalam kartu putih --- */
+.pod-img{width:min(420px,86%);height:340px;object-fit:contain;background:none;border-radius:0;padding:0;filter:drop-shadow(0 40px 55px rgba(0,0,0,.6)) drop-shadow(0 0 60px rgba(0,160,233,.22))}
+@media(max-width:900px){.pod-img{height:250px}}
+/* --- hero: cegah tumpang tindih saat transisi --- */
+.pod{visibility:hidden;transition:opacity .7s ease, transform .7s ease, visibility 0s linear .7s}
+.pod.on{visibility:visible;transition:opacity .7s ease, transform .7s ease, visibility 0s linear 0s}
+.pod.out{visibility:hidden}
+
+</style>
+</head>
+<body>
+<div class="grid-bg" aria-hidden="true"></div>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="brand" href="#">UROVO<b>.</b></a>
+    <div class="nav-l">
+      <a href="#download">Download</a>
+      <a href="#produk">Produk</a>
+      <a href="#industri">Industri</a>
+      <a href="#kontak">Kontak</a>
+    </div>
+    <a class="nav-cta" href="#download">Unduh Dokumen</a>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<header>
+  <div>
+    <div class="eyebrow">World's Leading IoT Solution Provider</div>
+    <h1>Perangkat Cerdas untuk <em>Rantai Pasok Digital</em></h1>
+    <p class="hero-sub">RFID reader, mobile computer, printer, dan Smart POS UROVO — mempercepat inventori hingga 10× lipat dan menghadirkan data real-time dari gudang sampai kasir.</p>
+    <div class="hero-act">
+      <a class="btn btn-p" href="#produk">Jelajahi Produk</a>
+      <a class="btn btn-g" href="#download">Download Katalog</a>
+    </div>
+  </div>
+
+  <!-- 3D floating showcase -->
+  <div class="stage" id="stage" aria-label="Produk unggulan per kategori">
+    <div class="ring" aria-hidden="true"></div>
+
+    <div class="pod on" data-pod>
+      <img class="pod-img" src="img/dt50p.png" data-cdn="https://enoss.urovo.com/product/170851xtKmQc.png" onerror="imgErr(this)" alt="UROVO DT50P" onerror="imgErr(this)">
+      <div class="pod-fallback">DT50P</div>
+      <div class="pod-cap"><div class="k">RFID Series</div><div class="n">DT50P</div><div class="d">Long-range RFID handheld · jangkauan 20 m</div></div>
+    </div>
+
+    <div class="pod" data-pod>
+      <img class="pod-img" src="img/dt66.png" data-cdn="https://enoss.urovo.com/product/80DX5tzY.jpg" onerror="imgErr(this)" alt="UROVO DT66" onerror="imgErr(this)">
+      <div class="pod-fallback">DT66</div>
+      <div class="pod-cap"><div class="k">Mobile Computers</div><div class="n">DT66</div><div class="d">Flagship rugged PDA · French Design Award</div></div>
+    </div>
+
+    <div class="pod" data-pod>
+      <img class="pod-img" src="img/fr2000.png" data-cdn="https://youboxunguanwang.oss-cn-shenzhen.aliyuncs.com/product/120829ZxmAK3.png" onerror="imgErr(this)" alt="UROVO FR2000" onerror="imgErr(this)">
+      <div class="pod-fallback">FR2000</div>
+      <div class="pod-cap"><div class="k">Desktop RFID</div><div class="n">FR2000</div><div class="d">Checkout retail · akurasi baca 99,9%</div></div>
+    </div>
+
+    <div class="pod" data-pod>
+      <img class="pod-img" src="img/d81r.png" data-cdn="https://enoss.urovo.com/product/75XDhJk5.png?x-oss-process=image/resize,w_700,limit_0" onerror="imgErr(this)" alt="UROVO D81R" onerror="imgErr(this)">
+      <div class="pod-fallback">D81R</div>
+      <div class="pod-cap"><div class="k">Printers</div><div class="n">D81R Series</div><div class="d">Cetak + encode tag RFID dalam satu langkah</div></div>
+    </div>
+
+    <div class="pod" data-pod>
+      <img class="pod-img" src="img/i9100.png" data-cdn="https://enoss.urovo.com/product/101apTmss.png" onerror="imgErr(this)" alt="UROVO i9100" onerror="imgErr(this)">
+      <div class="pod-fallback">i9100</div>
+      <div class="pod-cap"><div class="k">Smart POS</div><div class="n">i9100</div><div class="d">POS all-in-one dengan printer terintegrasi</div></div>
+    </div>
+
+    <div class="dots" id="dots" role="tablist" aria-label="Pilih produk"></div>
+  </div>
+</header>
+
+<!-- ================= TICKER ================= -->
+<div class="ticker" aria-label="Statistik UROVO">
+  <div class="ticker-in" id="ticker">
+    <div class="t-item"><b>NO.1</b><span>Pengiriman PDA di APAC</span></div>
+    <div class="t-item"><b>NO.2</b><span>Pengiriman PDA Dunia</span></div>
+    <div class="t-item"><b>2<i>JT+</i></b><span>Unit Terkirim 2023</span></div>
+    <div class="t-item"><b>100<i>+</i></b><span>Negara Tujuan</span></div>
+    <div class="t-item"><b>500<i>+</i></b><span>Channel Partner</span></div>
+    <div class="t-item"><b>8<i>JT</i></b><span>Kapasitas Produksi / Tahun</span></div>
+    <div class="t-item"><b>465<i>+</i></b><span>Paten Terdaftar</span></div>
+  </div>
+</div>
+
+<!-- ================= DOWNLOAD ================= -->
+<section id="download">
+  <div class="wrap dl-split">
+    <div>
+      <div class="sec-num">01 — DOKUMEN</div>
+      <h2>Dua dokumen,<br>semua yang perlu Anda tahu.</h2>
+      <p class="sec-p">Pelajari teknologi RFID beserta skenario penerapannya, dan kenali UROVO lebih dekat melalui profil resmi perusahaan. Gratis, tanpa registrasi.</p>
+    </div>
+    <div class="dl-stack">
+      <div class="dl-row">
+        <div class="dl-ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.6" fill="currentColor" stroke="none"/></svg>
+        </div>
+        <div class="dl-body">
+          <h3>Katalog: Introduction to RFID + Application Scenarios</h3>
+          <p>Frekuensi LF/HF/UHF · tag, reader &amp; antena · produk RFID UROVO · studi kasus logistik, cold chain, produksi &amp; retail — PDF, 2026</p>
+        </div>
+        <a class="btn btn-p dl-btn" href="Introduction_to_RFID___Application_Scenarios_14Apr2026.pdf" download>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download
+        </a>
+      </div>
+      <div class="dl-row">
+        <div class="dl-ico">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21h18"/><path d="M5 21V7l7-4 7 4v14"/><path d="M9 21v-4h6v4"/><path d="M9 11h.01M15 11h.01M12 8h.01"/></svg>
+        </div>
+        <div class="dl-body">
+          <h3>UROVO Company Profile 2026</h3>
+          <p>Dua dekade inovasi · jaringan global 100+ negara · fasilitas R&amp;D dan manufaktur · solusi 8 industri — PDF, April 2026</p>
+        </div>
+        <a class="btn btn-p dl-btn" href="UROVO_Company_Profile_April_2026.pdf" download>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PRODUK ================= -->
+<section id="produk">
+  <div class="wrap">
+    <div style="margin-bottom:64px;max-width:62ch">
+      <div class="sec-num">02 — PORTOFOLIO</div>
+      <h2>35 produk. 6 kategori.<br>Satu ekosistem.</h2>
+      <p class="sec-p">Geser setiap baris untuk menjelajahi seluruh lini produk — dari genggaman kurir hingga gerbang gudang.</p>
+    </div>
+
+    <!-- RFID -->
+    <div class="cat">
+      <div class="cat-head">
+        <div class="cat-idx">R1</div>
+        <div><h3>RFID Series</h3><p>Baca ratusan tag sekaligus tanpa garis pandang — tulang punggung inventori modern.</p></div>
+      </div>
+      <div class="rail">
+        <div class="pc"><div class="pc-imgbox"><img src="img/dt50p.png" data-cdn="https://enoss.urovo.com/product/170851xtKmQc.png" onerror="imgErr(this)" alt="DT50P" onerror="imgErr(this)"><span class="pc-ph">DT50P</span></div><div class="pc-body"><div class="pc-name">DT50P</div><p class="pc-desc">Handheld long-range 4G. Inventori batch cepat &amp; cari barang di rak tinggi, gudang, ekspedisi.</p><span class="pc-spec">Jangkauan 20 m</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/dt50d.png" data-cdn="https://enoss.urovo.com/product/119NPxfSX.png" onerror="imgErr(this)" alt="DT50D" onerror="imgErr(this)"><span class="pc-ph">DT50D</span></div><div class="pc-body"><div class="pc-name">DT50D</div><p class="pc-desc">Handheld short-range 4G. Cek tiket, stok toko fashion, ear tag peternakan, anti-pemalsuan.</p><span class="pc-spec">Jangkauan 1,5 m</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/rfdt50.png" data-cdn="https://youboxunguanwang.oss-cn-shenzhen.aliyuncs.com/product/160915xmNJJi.png?x-oss-process=image/resize,w_700,limit_0" onerror="imgErr(this)" alt="RFDT50" onerror="imgErr(this)"><span class="pc-ph">RFDT50</span></div><div class="pc-body"><div class="pc-name">RFDT50</div><p class="pc-desc">Sled RFID gagang lepas-pasang untuk DT50 — pas untuk stock opname berkala toko fashion &amp; perhiasan.</p><span class="pc-spec">Jangkauan 8 m</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/dt50p-lite.png" data-cdn="https://enoss.urovo.com/product/74QF5Jck.png" onerror="imgErr(this)" alt="DT50P Lite" onerror="imgErr(this)"><span class="pc-ph">DT50P Lite</span></div><div class="pc-body"><div class="pc-name">DT50P Lite</div><p class="pc-desc">Reader RFID ringkas untuk inventori harian dengan bujet efisien.</p><span class="pc-spec">Handheld Reader</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/rfg91.png" data-cdn="https://enoss.urovo.com/product/110202PB2BFR.png?x-oss-process=image/resize,w_700,limit_0" onerror="imgErr(this)" alt="RFG91" onerror="imgErr(this)"><span class="pc-ph">RFG91</span></div><div class="pc-body"><div class="pc-name">RFG91</div><p class="pc-desc">UHF RFID sled bertenaga untuk pembacaan massal di lapangan.</p><span class="pc-spec">UHF Sled</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/dt610.png" data-cdn="https://enoss.urovo.com/product/708PWd2p.png" onerror="imgErr(this)" alt="DT610" onerror="imgErr(this)"><span class="pc-ph">DT610</span></div><div class="pc-body"><div class="pc-name">DT610</div><p class="pc-desc">Short-range reader berlayar besar untuk verifikasi item satu per satu.</p><span class="pc-spec">Short Range</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/fr1000.png" data-cdn="https://enoss.urovo.com/product/091619MmFD6z.png" onerror="imgErr(this)" alt="FR1000" onerror="imgErr(this)"><span class="pc-ph">FR1000</span></div><div class="pc-body"><div class="pc-name">FR1000</div><p class="pc-desc">Fixed reader Android 8-channel. Gerbang gudang, lini produksi, cash box, manajemen aset.</p><span class="pc-spec">8 Channel · Android</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/fr2000.png" data-cdn="https://youboxunguanwang.oss-cn-shenzhen.aliyuncs.com/product/120829ZxmAK3.png" onerror="imgErr(this)" alt="FR2000" onerror="imgErr(this)"><span class="pc-ph">FR2000</span></div><div class="pc-body"><div class="pc-name">FR2000</div><p class="pc-desc">Desktop reader untuk kasir retail, perhiasan &amp; perpustakaan. Chip Impinj E710, anti cross-read.</p><span class="pc-spec">Akurasi 99,9% · 50 cm</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/fr7000.png" data-cdn="https://enoss.urovo.com/product/85e3wZ8P.jpg" onerror="imgErr(this)" alt="FR7000" onerror="imgErr(this)"><span class="pc-ph">FR7000</span></div><div class="pc-body"><div class="pc-name">FR7000 Series</div><p class="pc-desc">Fixed reader untuk pemasangan permanen di titik kritis alur logistik.</p><span class="pc-spec">Fixed Reader</span></div></div>
+      </div>
+      <div class="rail-hint">geser untuk melihat semua</div>
+    </div>
+
+    <!-- Full Touch -->
+    <div class="cat">
+      <div class="cat-head">
+        <div class="cat-idx">M2</div>
+        <div><h3>Full Touch Mobile Computers</h3><p>PDA Android layar penuh untuk kurir, gudang, dan retail — tangguh terhadap jatuh, debu, dan air.</p></div>
+      </div>
+      <div class="rail">
+        <div class="pc"><div class="pc-imgbox"><img src="img/dt66.png" data-cdn="https://enoss.urovo.com/product/80DX5tzY.jpg" onerror="imgErr(this)" alt="DT66" onerror="imgErr(this)"><span class="pc-ph">DT66</span></div><div class="pc-body"><div class="pc-name">DT66</div><p class="pc-desc">Flagship rugged PDA untuk operasional intensif — French Design Award.</p><span class="pc-spec">Rugged Flagship</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/dt50-5g.png" data-cdn="https://enoss.urovo.com/product/6003eYeWAT.png" onerror="imgErr(this)" alt="DT50 5G" onerror="imgErr(this)"><span class="pc-ph">DT50 5G</span></div><div class="pc-body"><div class="pc-name">DT50 5G</div><p class="pc-desc">PDA 5G flagship pertama — Red Dot Award 2023. Data real-time super cepat.</p><span class="pc-spec">5G · Red Dot 2023</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/dt50.png" data-cdn="https://enoss.urovo.com/product/70QnN6Rs.jpg" onerror="imgErr(this)" alt="DT50" onerror="imgErr(this)"><span class="pc-ph">DT50</span></div><div class="pc-body"><div class="pc-name">DT50</div><p class="pc-desc">PDA serbaguna terpopuler untuk kurir, gudang, retail. Kompatibel sled RFDT50.</p><span class="pc-spec">4G · Android</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/ct58s.png" data-cdn="https://enoss.urovo.com/product/2807rEPhdY.jpg" onerror="imgErr(this)" alt="CT58S" onerror="imgErr(this)"><span class="pc-ph">CT58S</span></div><div class="pc-body"><div class="pc-name">CT58S</div><p class="pc-desc">Mobile computer ramping untuk mobilitas tinggi — American Good Design Award.</p><span class="pc-spec">Slim PDA</span></div></div>
+      </div>
+      <div class="rail-hint">geser untuk melihat semua</div>
+    </div>
+
+    <!-- Keypad -->
+    <div class="cat">
+      <div class="cat-head">
+        <div class="cat-idx">K3</div>
+        <div><h3>Keypad Mobile Computers</h3><p>Tombol fisik untuk input cepat bersarung tangan — favorit gudang beku dan cold chain.</p></div>
+      </div>
+      <div class="rail">
+        <div class="pc"><div class="pc-imgbox"><img src="img/rt40s.png" data-cdn="https://enoss.urovo.com/product/81Ys77DJ.jpg" onerror="imgErr(this)" alt="RT40S" onerror="imgErr(this)"><span class="pc-ph">RT40S</span></div><div class="pc-body"><div class="pc-name">RT40S</div><p class="pc-desc">PDA keypad tangguh dengan opsi pistol grip — andalan cold chain. Red Dot Award.</p><span class="pc-spec">Cold Chain Ready</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/dt40.png" data-cdn="https://enoss.urovo.com/product/81F3i5eB.jpg" onerror="imgErr(this)" alt="DT40" onerror="imgErr(this)"><span class="pc-ph">DT40</span></div><div class="pc-body"><div class="pc-name">DT40</div><p class="pc-desc">Keypad PDA ringkas untuk scanning intensif inbound &amp; gudang.</p><span class="pc-spec">Compact Keypad</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/ct48.png" data-cdn="https://enoss.urovo.com/product/66FtKZcd.jpg" onerror="imgErr(this)" alt="CT48" onerror="imgErr(this)"><span class="pc-ph">CT48</span></div><div class="pc-body"><div class="pc-name">CT48</div><p class="pc-desc">Keypad PDA klasik yang terbukti andal untuk inventory management.</p><span class="pc-spec">Proven Workhorse</span></div></div>
+      </div>
+    </div>
+
+    <!-- Tablet Wearable Scanner -->
+    <div class="cat">
+      <div class="cat-head">
+        <div class="cat-idx">T4</div>
+        <div><h3>Tablets, Wearables &amp; Scanners</h3><p>Layar besar untuk forklift, perangkat hands-free untuk picking, dan scanner untuk meja kasir.</p></div>
+      </div>
+      <div class="rail">
+        <div class="pc"><div class="pc-imgbox"><img src="img/p8100p.png" data-cdn="https://enoss.urovo.com/product/63YwEfh5.jpg?x-oss-process=image/resize,w_700,limit_0" onerror="imgErr(this)" alt="P8100P" onerror="imgErr(this)"><span class="pc-ph">P8100P</span></div><div class="pc-body"><div class="pc-name">P8100P</div><p class="pc-desc">Tablet industri 10,1" untuk forklift, route planning &amp; lini produksi.</p><span class="pc-spec">10,1" · 4G/5G</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/p8100.png" data-cdn="https://enoss.urovo.com/product/180613Ka2xwZ.png?x-oss-process=image/resize,w_700,limit_0" onerror="imgErr(this)" alt="P8100" onerror="imgErr(this)"><span class="pc-ph">P8100</span></div><div class="pc-body"><div class="pc-name">P8100</div><p class="pc-desc">Tablet enterprise 8" — portabel untuk supervisor lapangan.</p><span class="pc-spec">8 inci</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/u2s.png" data-cdn="https://enoss.urovo.com/product/68iY7Td4.png?x-oss-process=image/resize,w_700,limit_0" onerror="imgErr(this)" alt="U2S" onerror="imgErr(this)"><span class="pc-ph">U2S</span></div><div class="pc-body"><div class="pc-name">U2S</div><p class="pc-desc">Wearable terminal hands-free untuk picking berkecepatan tinggi.</p><span class="pc-spec">Wearable</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/r7.png" data-cdn="https://enoss.urovo.com/product/094400M4GyJk.png?x-oss-process=image/resize,w_700,limit_0" onerror="imgErr(this)" alt="R7 Series" onerror="imgErr(this)"><span class="pc-ph">R7</span></div><div class="pc-body"><div class="pc-name">R7 Series</div><p class="pc-desc">Ring scanner di jari — scanning tanpa menghentikan pekerjaan tangan.</p><span class="pc-spec">Ring Scanner</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/k200.png" data-cdn="https://youboxunguanwang.oss-cn-shenzhen.aliyuncs.com/product/65fxs3N2.png?x-oss-process=image/resize,w_700,limit_0" onerror="imgErr(this)" alt="K200/K220" onerror="imgErr(this)"><span class="pc-ph">K200</span></div><div class="pc-body"><div class="pc-name">K200 / K220</div><p class="pc-desc">Handheld scanner untuk kasir, inbound &amp; DPM data acquisition.</p><span class="pc-spec">Barcode Scanner</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/k180.png" data-cdn="https://enoss.urovo.com/product/094903NeJBb7.png?x-oss-process=image/resize,w_700,limit_0" onerror="imgErr(this)" alt="K180" onerror="imgErr(this)"><span class="pc-ph">K180</span></div><div class="pc-body"><div class="pc-name">K180</div><p class="pc-desc">Scanner nirkabel ergonomis untuk retail, farmasi &amp; QR payment.</p><span class="pc-spec">Wireless</span></div></div>
+      </div>
+      <div class="rail-hint">geser untuk melihat semua</div>
+    </div>
+
+    <!-- Printers -->
+    <div class="cat">
+      <div class="cat-head">
+        <div class="cat-idx">P5</div>
+        <div><h3>Printers</h3><p>Dari printer resi saku hingga mesin industrial non-stop — termasuk printer yang meng-encode tag RFID.</p></div>
+      </div>
+      <div class="rail">
+        <div class="pc"><div class="pc-imgbox"><img src="img/d81r.png" data-cdn="https://enoss.urovo.com/product/75XDhJk5.png?x-oss-process=image/resize,w_700,limit_0" onerror="imgErr(this)" alt="D81R" onerror="imgErr(this)"><span class="pc-ph">D81R</span></div><div class="pc-body"><div class="pc-name">D81R Series</div><p class="pc-desc">Printer RFID desktop — cetak sekaligus encode tag dalam satu langkah.</p><span class="pc-spec">RFID Printer</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/k329.png" data-cdn="https://enoss.urovo.com/product/91d4p8SM.png?x-oss-process=image/resize,w_700,limit_0" onerror="imgErr(this)" alt="K329" onerror="imgErr(this)"><span class="pc-ph">K329</span></div><div class="pc-body"><div class="pc-name">K329</div><p class="pc-desc">Printer label mobile 3 inci — cetak resi di mana saja.</p><span class="pc-spec">Mobile 3"</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/k419.png" data-cdn="https://enoss.urovo.com/product/72MyRHp4.png?x-oss-process=image/resize,w_700,limit_0" onerror="imgErr(this)" alt="K419" onerror="imgErr(this)"><span class="pc-ph">K419</span></div><div class="pc-body"><div class="pc-name">K419</div><p class="pc-desc">Printer label mobile 4 inci untuk kurir dan distribusi.</p><span class="pc-spec">Mobile 4"</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/k388pro.png" data-cdn="https://enoss.urovo.com/product/94m3PXQK.jpg?x-oss-process=image/resize,w_700,limit_0" onerror="imgErr(this)" alt="K388Pro" onerror="imgErr(this)"><span class="pc-ph">K388Pro</span></div><div class="pc-body"><div class="pc-name">K388Pro</div><p class="pc-desc">Printer portabel serbaguna untuk distribution center.</p><span class="pc-spec">Portable</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/d7100.png" alt="D7100" onerror="imgErr(this)"><span class="pc-ph">D7100</span></div><div class="pc-body"><div class="pc-name">D7100 Series</div><p class="pc-desc">Printer desktop direct thermal / thermal transfer untuk label harian.</p><span class="pc-spec">Desktop</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/d8100.png" alt="D8100 Plus" onerror="imgErr(this)"><span class="pc-ph">D8100+</span></div><div class="pc-body"><div class="pc-name">D8100 Plus</div><p class="pc-desc">Printer desktop performa tinggi untuk volume menengah.</p><span class="pc-spec">Desktop Plus</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/d9100.png" alt="D9100" onerror="imgErr(this)"><span class="pc-ph">D9100</span></div><div class="pc-body"><div class="pc-name">D9100 Series</div><p class="pc-desc">Printer industrial untuk cetak label non-stop volume besar.</p><span class="pc-spec">Industrial</span></div></div>
+      </div>
+      <div class="rail-hint">geser untuk melihat semua</div>
+    </div>
+
+    <!-- POS -->
+    <div class="cat" style="margin-bottom:0">
+      <div class="cat-head">
+        <div class="cat-idx">S6</div>
+        <div><h3>Smart POS</h3><p>Terminal pembayaran Android untuk retail, katering, farmasi, hingga kurir COD.</p></div>
+      </div>
+      <div class="rail">
+        <div class="pc"><div class="pc-imgbox"><img src="img/i9100.png" data-cdn="https://enoss.urovo.com/product/101apTmss.png" onerror="imgErr(this)" alt="i9100" onerror="imgErr(this)"><span class="pc-ph">i9100</span></div><div class="pc-body"><div class="pc-name">i9100</div><p class="pc-desc">Smart POS layar ganda dengan printer terintegrasi untuk katering &amp; retail.</p><span class="pc-spec">All-in-One</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/i9000s.png" data-cdn="https://enoss.urovo.com/product/3203xQWmBr.png" onerror="imgErr(this)" alt="i9000S" onerror="imgErr(this)"><span class="pc-ph">i9000S</span></div><div class="pc-body"><div class="pc-name">i9000S</div><p class="pc-desc">Smart POS Android untuk pembayaran mobile, kurir COD &amp; farmasi.</p><span class="pc-spec">Android POS</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/i2000.png" alt="i2000" onerror="imgErr(this)"><span class="pc-ph">i2000</span></div><div class="pc-body"><div class="pc-name">i2000</div><p class="pc-desc">POS ringkas untuk pembayaran QR dan kartu di kios kecil.</p><span class="pc-spec">Compact POS</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/i5000.png" data-cdn="https://enoss.urovo.com/product/3104CtndAh.jpg" onerror="imgErr(this)" alt="i5000" onerror="imgErr(this)"><span class="pc-ph">i5000</span></div><div class="pc-body"><div class="pc-name">i5000</div><p class="pc-desc">Terminal pembayaran modern untuk mobile payment.</p><span class="pc-spec">Payment Terminal</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/i5300.png" data-cdn="https://enoss.urovo.com/product/92Qp227W.jpg" onerror="imgErr(this)" alt="i5300" onerror="imgErr(this)"><span class="pc-ph">i5300</span></div><div class="pc-body"><div class="pc-name">i5300</div><p class="pc-desc">POS keypad klasik yang familiar bagi kasir.</p><span class="pc-spec">Keypad POS</span></div></div>
+        <div class="pc"><div class="pc-imgbox"><img src="img/i5300l.png" data-cdn="https://enoss.urovo.com/product/76Ns7XR3.jpg" onerror="imgErr(this)" alt="i5300L" onerror="imgErr(this)"><span class="pc-ph">i5300L</span></div><div class="pc-body"><div class="pc-name">i5300L</div><p class="pc-desc">Varian i5300 dengan layar lebih luas untuk kenyamanan transaksi.</p><span class="pc-spec">Large Display</span></div></div>
+      </div>
+      <div class="rail-hint">geser untuk melihat semua</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INDUSTRI ================= -->
+<section id="industri">
+  <div class="wrap">
+    <div class="sec-num">03 — INDUSTRI</div>
+    <h2>Dipercaya di 100+ negara,<br>di setiap sektor.</h2>
+    <div class="ind-grid">
+      <div class="ind">Logistik &amp; Ekspedisi</div>
+      <div class="ind">Retail &amp; Fashion</div>
+      <div class="ind">E-commerce</div>
+      <div class="ind">Pergudangan</div>
+      <div class="ind">Cold Chain</div>
+      <div class="ind">Manufaktur</div>
+      <div class="ind">Healthcare</div>
+      <div class="ind">Keuangan &amp; Payment</div>
+      <div class="ind">Utilitas Publik</div>
+      <div class="ind">Pemerintahan</div>
+      <div class="ind">Hospitality</div>
+      <div class="ind">Peternakan &amp; Agri</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= KONTAK ================= -->
+<section id="kontak">
+  <div class="wrap">
+    <div class="sec-num" style="text-align:center">04 — KONTAK</div>
+    <h2>Siap Mendigitalkan Operasional Anda?</h2>
+    <p>Hubungi tim UROVO untuk konsultasi kebutuhan, demo produk langsung, atau proof-of-concept di lokasi Anda.</p>
+    <div class="hero-act" style="justify-content:center">
+      <a class="btn btn-p" href="mailto:urovo@urovo.com">Hubungi Kami</a>
+      <a class="btn btn-g" href="https://www.urovo.com" target="_blank" rel="noopener">www.urovo.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p><strong>UROVO</strong> — The Smarter The Better · <a href="mailto:urovo@urovo.com">urovo@urovo.com</a></p>
+    <p style="margin-top:6px;opacity:.7">Dipresentasikan untuk Delamibrands · Jakarta 2026 · Irfan Mulyana</p>
+  </div>
+</footer>
+
+<script>
+function imgErr(el){
+  if(el.dataset.cdn && !el.dataset.tried){
+    el.dataset.tried = "1";
+    el.src = el.dataset.cdn;     // lokal gagal -> coba CDN resmi
+    return;
+  }
+  el.classList.add('noimg');
+  el.parentElement.classList.add('noimg');
+}
+</script>
+<script>
+// ===== 3D showcase: bergantian otomatis =====
+(function(){
+  const pods=[...document.querySelectorAll('[data-pod]')];
+  const dotsBox=document.getElementById('dots');
+  let i=0,timer;
+  pods.forEach((p,idx)=>{
+    const b=document.createElement('button');
+    b.setAttribute('aria-label','Produk '+(idx+1));
+    if(idx===0)b.classList.add('on');
+    b.addEventListener('click',()=>{go(idx);restart();});
+    dotsBox.appendChild(b);
+  });
+  const dots=[...dotsBox.children];
+  function go(n){
+    pods[i].classList.remove('on');pods[i].classList.add('out');
+    dots[i].classList.remove('on');
+    const prev=i;i=n%pods.length;
+    setTimeout(()=>pods[prev].classList.remove('out'),800);
+    pods[i].classList.add('on');dots[i].classList.add('on');
+  }
+  function next(){go(i+1)}
+  function restart(){clearInterval(timer);timer=setInterval(next,3800)}
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduce)restart();
+})();
+// ===== ticker duplikat agar loop mulus =====
+(function(){
+  const t=document.getElementById('ticker');
+  t.innerHTML+=t.innerHTML;
+})();
+</script>
+</body>
+</html>
